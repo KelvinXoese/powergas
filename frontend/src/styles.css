@@ -1,0 +1,47 @@
+/* ── Powergas Operations Console — Design Tokens ──
+   Aesthetic: industrial control room. Deep slate base, flame-amber signature
+   accent (the LPG flame), IBM Plex Mono for telemetry data, Sora for display. */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --slate-950: #0b0e14;
+  --slate-900: #121722;
+  --slate-850: #181f2e;
+  --slate-800: #1f2838;
+  --slate-700: #2b3648;
+  --slate-600: #3d4a60;
+  --ink-300: #8b97ad;
+  --ink-200: #b8c2d4;
+  --ink-100: #e6ebf3;
+
+  --flame: #ff7a18;      /* signature: LPG flame */
+  --flame-soft: #ff9d4d;
+  --flame-glow: rgba(255, 122, 24, 0.14);
+  --teal: #19c3a6;       /* "go" / available */
+  --amber: #ffc93c;      /* warning / low stock */
+  --rose: #ff5c6c;       /* error / damaged */
+  --blue: #4d8dff;       /* info / in-transit */
+
+  --display: 'Sora', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--slate-950);
+  color: var(--ink-100);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+:focus-visible { outline: 2px solid var(--flame); outline-offset: 2px; }
+
+.mono { font-family: var(--mono); }
+.display { font-family: var(--display); }

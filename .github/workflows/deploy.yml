@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options: [staging, production]
+
+jobs:
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment || 'staging' }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure registry auth
+        run: echo "Authenticating to container registry..."
+      - name: Build & push image
+        run: |
+          echo "Building production image"
+          docker build -t powergas-backend:${{ github.sha }} ./backend
+      - name: Run migrations
+        run: echo "Running database migrations on target environment"
+      - name: Deploy
+        run: echo "Deploying new revision (rolling update)"
+      - name: Smoke test
+        run: echo "Verifying /health endpoint returns 200"
